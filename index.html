@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kübra'nın Hayatı · kubra.life</title>
+<meta name="description" content="Kübra'nın tabloları: nilüfer havuzları, kızıl gökyüzleri ve sessiz siluetler.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0c0b'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23c9a96e'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   kubra.life — Kübra'nın Hayatı
+   ============================================================ */
+:root{
+  --bg:#0d0c0b;
+  --bg-2:#141210;
+  --ink:#ece6da;
+  --ink-soft:#b9b1a3;
+  --ink-mute:#7d766b;
+  --gold:#c9a96e;
+  --gold-soft:rgba(201,169,110,.28);
+  --mat:#ebe5d8;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:300;line-height:1.75;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+main,footer{overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit}
+::selection{background:var(--gold);color:var(--bg)}
+
+/* film grain */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------- LOCK SCREEN ---------------- */
+#lock{
+  position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;
+  background:
+    radial-gradient(60vmax 50vmax at 50% 30%, rgba(201,169,110,.10), transparent 60%),
+    radial-gradient(50vmax 40vmax at 80% 90%, rgba(40,90,120,.12), transparent 60%),
+    var(--bg);
+  transition:opacity 1.1s var(--ease), visibility 1.1s;
+}
+#lock.gone{opacity:0;visibility:hidden}
+.lock-card{width:min(420px,100%);text-align:center}
+.lock-mark{
+  font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.32em;
+  color:var(--gold);text-transform:lowercase;margin-bottom:28px;opacity:.9
+}
+.lock-title{font-family:var(--serif);font-weight:400;font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}
+.lock-title em{color:var(--gold);font-style:italic}
+.lock-sub{color:var(--ink-soft);font-size:14px;margin:0 0 34px}
+.lock-form{display:flex;flex-direction:column;gap:14px}
+.lock-input{
+  width:100%;padding:15px 18px;border-radius:2px;text-align:center;
+  background:rgba(255,255,255,.03);border:1px solid rgba(201,169,110,.3);
+  color:var(--ink);font-family:var(--sans);font-size:16px;letter-spacing:.12em;outline:none;
+  transition:border-color .3s, background .3s;
+}
+.lock-input:focus{border-color:var(--gold);background:rgba(255,255,255,.05)}
+.lock-input::placeholder{color:var(--ink-mute);letter-spacing:.08em}
+.btn-gold{
+  padding:15px 18px;border:1px solid var(--gold);background:transparent;cursor:pointer;
+  color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font-size:12px;font-weight:500;
+  transition:background .35s var(--ease), color .35s var(--ease);
+}
+.btn-gold:hover,.btn-gold:focus-visible{background:var(--gold);color:var(--bg);outline:none}
+.lock-hint{margin-top:22px;font-size:13px;color:var(--ink-mute);font-style:italic;font-family:var(--serif)}
+.lock-msg{min-height:22px;font-size:13px;color:#d79a8c;margin-top:6px;transition:opacity .3s}
+.shake{animation:shake .5s var(--ease)}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ---------------- TOP BAR ---------------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(18px,4vw,48px);
+  background:linear-gradient(to bottom, rgba(13,12,11,.92), rgba(13,12,11,0));
+  transition:transform .5s var(--ease), opacity .5s;
+}
+.topbar.hide{transform:translateY(-100%);opacity:0}
+.brand{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.brand span{color:var(--gold)}
+.nav{display:flex;gap:clamp(14px,3vw,34px)}
+.nav a{
+  color:var(--ink-soft);text-decoration:none;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  position:relative;padding:4px 0;transition:color .3s
+}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{transform:scaleX(1)}
+
+/* ---------------- HERO ---------------- */
+.hero{
+  min-height:100vh;min-height:100svh;display:grid;grid-template-rows:1fr auto;justify-items:center;align-items:center;text-align:center;
+  padding:120px clamp(20px,6vw,80px) 34px;position:relative;
+  background:
+    radial-gradient(70vmax 50vmax at 50% 0%, rgba(201,169,110,.10), transparent 60%),
+    radial-gradient(40vmax 30vmax at 15% 85%, rgba(30,90,110,.10), transparent 70%),
+    radial-gradient(40vmax 30vmax at 90% 75%, rgba(150,30,30,.08), transparent 70%);
+}
+.eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.hero h1{
+  font-family:var(--serif);font-weight:400;margin:0;
+  font-size:clamp(44px,10vw,118px);line-height:1.02;letter-spacing:-.01em;
+}
+.hero h1 em{display:block;font-style:italic;color:var(--gold);font-size:.52em;margin-top:.35em;letter-spacing:0}
+.hero-rule{width:64px;height:1px;background:var(--gold);margin:42px auto;opacity:.7}
+.hero p{max-width:600px;margin:0 auto;color:var(--ink-soft);font-size:clamp(15px,1.7vw,17px)}
+.hero p + p{margin-top:16px}
+.hero .hero-quote{margin-top:34px;font-family:var(--serif);font-style:italic;color:var(--gold);font-size:clamp(18px,2.2vw,22px);line-height:1.5}
+.scroll-cue{
+  margin-top:56px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none
+}
+.scroll-cue i{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:drip 2.4s var(--ease) infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------------- SERIES ---------------- */
+.series{padding:clamp(80px,12vw,160px) clamp(18px,5vw,64px);position:relative}
+.series + .series{border-top:1px solid rgba(201,169,110,.10)}
+.series-head{max-width:760px;margin:0 auto clamp(56px,8vw,100px);text-align:center}
+.numeral{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:clamp(54px,8vw,84px);line-height:1;opacity:.85}
+.series-kicker{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--ink-mute);margin:18px 0 10px}
+.series-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5vw,54px);margin:0 0 22px;line-height:1.1}
+.series-head p{color:var(--ink-soft);margin:0 auto;max-width:620px}
+
+.row{
+  display:grid;gap:clamp(48px,6vw,90px) clamp(28px,5vw,80px);
+  max-width:1240px;margin:0 auto;align-items:start;
+}
+.row + .row{margin-top:clamp(70px,10vw,140px)}
+.row.two{grid-template-columns:1fr 1fr}
+.row.two.offset > .piece:nth-child(2){margin-top:clamp(0px,8vw,120px)}
+.row.solo{max-width:620px}
+.row.solo.wide{max-width:760px}
+.piece.slim{max-width:400px;margin-left:auto;margin-right:auto;width:100%}
+.piece.slim figcaption{max-width:400px}
+
+/* pair link (process / diptych) */
+.pair{position:relative}
+.pair-label{
+  grid-column:1 / -1;display:flex;align-items:center;justify-content:center;gap:18px;
+  font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px;margin-bottom:-20px
+}
+.pair-label::before,.pair-label::after{content:"";height:1px;width:clamp(40px,10vw,120px);background:var(--gold-soft)}
+
+/* ---------------- PIECE / FRAME ---------------- */
+.piece{margin:0;position:relative;opacity:0;transform:translateY(36px);transition:opacity 1.2s var(--ease), transform 1.2s var(--ease)}
+.piece.in{opacity:1;transform:none}
+.piece::before{ /* gallery spotlight */
+  content:"";position:absolute;left:50%;top:-14%;width:130%;height:70%;transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(255,232,190,.075), transparent);
+  pointer-events:none;z-index:0;transition:opacity .6s;opacity:.8
+}
+.piece:hover::before{opacity:1}
+.frame{
+  position:relative;z-index:1;cursor:zoom-in;border:0;padding:clamp(9px,1.3vw,16px);width:100%;display:block;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.06), transparent 35%, rgba(0,0,0,.25) 70%),
+    linear-gradient(160deg,#2b2621 0%,#151210 45%,#211c18 100%);
+  box-shadow:
+    0 0 0 1px rgba(201,169,110,.22),
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 40px 70px -30px rgba(0,0,0,.95),
+    0 18px 30px -18px rgba(0,0,0,.8);
+  transition:transform .7s var(--ease), box-shadow .7s var(--ease);
+}
+.frame:hover,.frame:focus-visible{transform:translateY(-6px);outline:none;
+  box-shadow:0 0 0 1px rgba(201,169,110,.5), inset 0 0 0 1px rgba(255,255,255,.06), 0 60px 90px -35px rgba(0,0,0,1), 0 24px 40px -20px rgba(0,0,0,.85)}
+.fillet{display:block;padding:2px;background:linear-gradient(135deg,#e4cc93,#9c7b43 45%,#d9bd82 70%,#8a6a36)}
+.mat{background:var(--mat);padding:clamp(12px,2.4vw,30px);box-shadow:inset 0 2px 7px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.08)}
+.mat img{width:100%;box-shadow:0 0 0 1px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.25);background:#d9d2c4}
+
+/* placard */
+figcaption{position:relative;z-index:1;max-width:520px;margin:30px auto 0;text-align:center}
+.cat{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+figcaption h3{font-family:var(--serif);font-weight:400;font-style:italic;font-size:clamp(22px,2.4vw,28px);margin:8px 0 4px;line-height:1.25}
+.medium{font-size:12px;color:var(--ink-mute);letter-spacing:.06em;margin-bottom:14px}
+figcaption p{margin:0;color:var(--ink-soft);font-size:15px}
+
+/* ---------------- CLOSING ---------------- */
+.closing{
+  padding:clamp(100px,14vw,180px) clamp(20px,6vw,80px) clamp(120px,14vw,170px);text-align:center;
+  border-top:1px solid rgba(201,169,110,.10);
+  background:radial-gradient(60vmax 40vmax at 50% 100%, rgba(201,169,110,.08), transparent 70%);
+}
+.closing blockquote{
+  font-family:var(--serif);font-style:italic;font-weight:400;margin:0 auto;max-width:760px;
+  font-size:clamp(22px,3.2vw,34px);line-height:1.5;color:var(--ink)
+}
+.closing .sign{margin-top:36px;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+footer{text-align:center;padding:0 20px 44px;font-size:11px;letter-spacing:.2em;color:var(--ink-mute)}
+
+/* ---------------- LIGHTBOX ---------------- */
+#lb{
+  position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,40px);background:rgba(8,7,6,.96);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease), visibility .5s;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+#lb.open{opacity:1;visibility:visible}
+#lb img{max-width:min(94vw,1300px);max-height:78vh;width:auto;height:auto;object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,.8);transform:scale(.97);transition:transform .6s var(--ease), opacity .35s;user-select:none;-webkit-user-drag:none}
+#lb.open img{transform:none}
+#lb .lb-cap{margin-top:22px;text-align:center}
+#lb .lb-cap .cat{display:block}
+#lb .lb-cap h4{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;margin:6px 0 0}
+.lb-btn{
+  position:absolute;background:none;border:1px solid rgba(201,169,110,.3);color:var(--gold);
+  width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  transition:background .3s, border-color .3s
+}
+.lb-btn:hover{background:rgba(201,169,110,.12);border-color:var(--gold)}
+.lb-close{top:18px;right:18px}
+.lb-prev{left:18px;top:50%;transform:translateY(-50%)}
+.lb-next{right:18px;top:50%;transform:translateY(-50%)}
+.lb-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* ---------------- MUSIC BOX ---------------- */
+.music{position:fixed;right:clamp(14px,3vw,30px);bottom:clamp(14px,3vw,30px);z-index:120;display:flex;align-items:flex-end;gap:12px}
+.disc{
+  width:58px;height:58px;border-radius:50%;cursor:pointer;border:1px solid rgba(201,169,110,.45);flex:none;
+  background:
+    radial-gradient(circle, var(--gold) 0 5px, #111 5.5px 12px, transparent 12.5px),
+    repeating-radial-gradient(circle, #1a1816 0 2px, #0f0e0d 2.5px 4px);
+  box-shadow:0 12px 30px rgba(0,0,0,.6), 0 0 0 4px rgba(13,12,11,.6);
+  display:grid;place-items:center;position:relative;transition:transform .4s var(--ease), border-color .3s;
+}
+.disc:hover{transform:scale(1.06);border-color:var(--gold)}
+.disc.spin{animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.disc::after{ /* gentle pulse when waiting for a tap */
+  content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold);opacity:0
+}
+.disc.invite::after{animation:invite 2.2s var(--ease) infinite}
+@keyframes invite{0%{opacity:.7;transform:scale(.9)}100%{opacity:0;transform:scale(1.35)}}
+.music-panel{
+  width:248px;padding:14px 14px 12px;background:rgba(20,18,16,.94);border:1px solid rgba(201,169,110,.25);
+  box-shadow:0 20px 50px rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .45s var(--ease), transform .45s var(--ease);
+}
+.music.open .music-panel{opacity:1;transform:none;pointer-events:auto}
+.mp-title{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.2}
+.mp-artist{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin:3px 0 10px}
+.mp-video{width:220px;height:124px;background:#000;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.mp-video iframe{width:220px;height:124px;display:block}
+.mp-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.mp-play{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--gold);background:none;color:var(--gold);cursor:pointer;display:grid;place-items:center}
+.mp-play svg{width:14px;height:14px;fill:currentColor}
+.mp-vol{flex:1;accent-color:var(--gold);height:2px}
+.mp-status{font-size:11px;color:var(--ink-mute);margin-top:8px;min-height:16px}
+.music-tip{
+  position:absolute;right:70px;bottom:14px;white-space:nowrap;font-size:12px;color:var(--ink-soft);
+  font-family:var(--serif);font-style:italic;opacity:0;transition:opacity .5s;pointer-events:none
+}
+.music.tip .music-tip{opacity:1}
+.music.open .music-tip{opacity:0}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:860px){
+  .row.two{grid-template-columns:1fr}
+  .row.two.offset > .piece:nth-child(2){margin-top:0}
+  .row.two{max-width:560px}
+  .pair-label{margin-bottom:-10px}
+}
+@media (max-width:600px){
+  .nav{display:none}
+  .topbar{padding:14px 18px}
+  .lb-prev,.lb-next{top:auto;bottom:22px;transform:none}
+  .lb-prev{left:calc(50% - 60px)}
+  .lb-next{right:calc(50% - 60px)}
+  #lb img{max-height:70vh}
+  #lb .lb-cap{margin-bottom:70px}
+  .music-tip{display:none}
+  figcaption p{font-size:14.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .piece{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body class="locked">
+
+<!-- ================= ŞİFRE EKRANI ================= -->
+<div id="lock" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+  <div class="lock-card">
+    <div class="lock-mark">kubra.life</div>
+    <h1 class="lock-title" id="lock-title">Küçük bir <em>sergi</em>,<br>tek bir ziyaretçi için.</h1>
+    <p class="lock-sub">Kapıyı açmak için şifreyi yaz.</p>
+    <form class="lock-form" id="lock-form" autocomplete="off">
+      <input class="lock-input" id="lock-input" type="password" placeholder="şifre" aria-label="Şifre" autocapitalize="off" spellcheck="false">
+      <button class="btn-gold" type="submit">Galeriye Gir</button>
+    </form>
+    <div class="lock-msg" id="lock-msg" aria-live="polite"></div>
+    <div class="lock-hint">İpucu: tablolarında en çok açan çiçek.</div>
+  </div>
+</div>
+
+<!-- ================= ÜST BAR ================= -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top">kubra<span>.</span>life</a>
+  <nav class="nav" aria-label="Bölümler">
+    <a href="#havuz">Havuz</a>
+    <a href="#kizil">Kızıl</a>
+    <a href="#diller">Diller</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ================= GİRİŞ ================= -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Bir masa · bir kavanoz renkli su · dokuz tablo</div>
+      <h1>Merhaba Kübra,<em>burası senin hayatın.</em></h1>
+      <div class="hero-rule"></div>
+      <p>Belki hepsi değil ama en renkli köşesi. Fırçaların, palet kaplarının ve Ecoline şişelerinin arasında akşamdan akşama büyüyen havuzlar, kızıl gökyüzleri, karanlıkta bekleyen sessiz siluetler.</p>
+      <p>Bu sayfa onları duvara asmak için yapıldı. Her birinin önünde biraz durmak, bir yaprağın fırça izine, bir kanadın ucundaki siyaha bakmak için.</p>
+      <p class="hero-quote">Tabloların sana benziyor;<br>bakan, farkında olmadan biraz daha uzun kalıyor.</p>
+    </div>
+    <a class="scroll-cue" href="#havuz">Sergiye geç<i></i></a>
+  </section>
+
+  <!-- ================= SERİ I ================= -->
+  <section class="series" id="havuz">
+    <div class="series-head">
+      <div class="numeral">I</div>
+      <div class="series-kicker">Seri · beş eser</div>
+      <h2>Nilüfer Havuzu</h2>
+      <p>Yukarıdan bakılan bir havuz. Yapraklar ortadaki tek bir noktadan dışa doğru açılan fırça darbeleriyle kurulmuş. Suyun içinde koyu maviler kıvrılıyor, koi balıkları her seferinde başka bir yöne süzülüyor. Aynı motife beş kez dönmek, onu her seferinde yeniden keşfetmek demek.</p>
+    </div>
+
+    <div class="row two pair">
+      <div class="pair-label">önce · sonra</div>
+
+      <figure class="piece">
+        <button class="frame" data-i="0" aria-label="Büyüt: Beyaz Bırakılanlar">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim1.webp" width="1000" height="981" alt="Yarım bir tablo: lacivert suda yeşil nilüfer yaprakları, üç koi balığı henüz boyanmamış beyaz siluetler halinde" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">I · 01</div>
+          <h3>Beyaz Bırakılanlar</h3>
+          <div class="medium">Tuval üzerine · süreç</div>
+          <p>Koiler henüz boyanmamış, yerlerinde tuvalin kendisi duruyor. Balıkların yeri en baştan düşünülmüş, çevreleri suyla doldurulmuş. Buradaki boşluk bir eksik değil, verilmiş bir söz. Bir tablonun yarı yolda nasıl göründüğünü görmek, ressamın aklından geçeni görmek gibi.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="piece">
+        <button class="frame" data-i="1" aria-label="Büyüt: Üç Koi">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim2.webp" width="1028" height="1620" alt="Tamamlanmış tablo: nilüfer yaprakları arasında turuncu-beyaz, kırmızı ve benekli üç koi balığı; masada fırçalar, palet ve sulu boya kutusu" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">I · 02</div>
+          <h3>Üç Koi</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Aynı tuvalin tamamlanmış hali. Beyaz bırakılan siluetler turuncuya, kırmızıya, benekli altına dönüşmüş. Aralarına ince, ışıklı su otları eklenmiş. Yaprakların her biri ortadaki tek noktadan yayılan darbelerle örülmüş; sabır isteyen, ölçülü bir ritim.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="row two offset">
+      <figure class="piece">
+        <button class="frame" data-i="2" aria-label="Büyüt: Halkalar">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim3.webp" width="694" height="1300" alt="Yeşil-mavi suda kırmızı-beyaz koi balıkları ve yüzeyde altın renkli halkalar; arka planda bir başka koi tablosu" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">I · 03</div>
+          <h3>Halkalar</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Kırmızı-beyaz koiler ve yüzeyde açılan altın halkalar. Arka plan bu kez daha serbest: mavi ve yeşil, sınırı belirsiz lekelerle birbirine karışıyor. Balıklar ise keskin, kendinden emin konturlarla bu bulanık suyun üstüne oturuyor. Yapraklardan birinde küçük bir yıldız saklı.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="piece">
+        <button class="frame" data-i="3" aria-label="Büyüt: İki Yol">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim6.webp" width="1057" height="1567" alt="Lacivert suda iki turuncu-beyaz koi balığı ve yeşil nilüfer yaprakları, suyun hareketi ince yeşil çizgilerle işlenmiş" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">I · 04</div>
+          <h3>İki Yol</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>İki koi, birbirine değmeden aynı akıntıda. Suyun hareketi bu tabloda çizgiyle anlatılmış: koyu mavinin üzerine ince, kuru, neredeyse kalem gibi bırakılmış yeşil kıvrımlar. Turuncunun içindeki koyu benekler aceleyle değil, yerini bilerek tek tek konmuş.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="row solo wide">
+      <figure class="piece">
+        <button class="frame" data-i="4" aria-label="Büyüt: Nilüfer ve Koi">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim4.webp" width="1026" height="1672" alt="Lacivert zeminde tül gibi beyaz yüzgeçli tek bir koi, altın spiraller, beyaz bir nilüfer çiçeği ve iki büyük yeşil yaprak" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">I · 05</div>
+          <h3>Nilüfer ve Koi</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Serinin en sakin, en masalsı tablosu. Lacivert bir derinlikte tek bir koi; yüzgeçleri saydam, beyaz katmanlarla tül gibi açılıyor. Çevresinde altın sarısı spiraller, başının hemen üstünde açmış beyaz bir nilüfer. Burada su artık bir havuz değil, bir rüya.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= SERİ II ================= -->
+  <section class="series" id="kizil">
+    <div class="series-head">
+      <div class="numeral">II</div>
+      <div class="series-kicker">Seri · iki eser</div>
+      <h2>Kızıl Gökyüzü</h2>
+      <p>Bütün tuvali dolduran tek bir renk. O büyük kırmızının içinde ise küçük, beyaz, kanatlarını açmış flamingolar. Bu iki tablo birlikte okunmak için yan yana duruyor.</p>
+    </div>
+
+    <div class="row two pair">
+      <div class="pair-label">bir · iki</div>
+
+      <figure class="piece">
+        <button class="frame" data-i="5" aria-label="Büyüt: Yalnız Uçuş">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim8.webp" width="1048" height="1600" alt="Parlak kırmızı tuvalin ortasında tek başına uçan beyaz bir flamingo" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">II · 01</div>
+          <h3>Yalnız Uçuş</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Parlak, sıcak bir kırmızının içinde tek başına bir flamingo. Kompozisyonun neredeyse tamamı boş bırakılmış ve bu cesur bir seçim: göz ister istemez o küçük beyaz siluete gidiyor. Kenarlarda fırçanın tuvali bitirmeden bıraktığı kuru, yırtık izler var. Çerçevesiz, nefes alan bir sınır.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="piece">
+        <button class="frame" data-i="6" aria-label="Büyüt: Birlikte">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim9.webp" width="1085" height="880" alt="Koyu bordo tuvalde aynı yöne birlikte uçan iki flamingo, kanat uçları siyah" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">II · 02</div>
+          <h3>Birlikte</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Kırmızı derinleşmiş, bordoya dönmüş; gökyüzü artık bir akşam gibi. Bu kez iki flamingo var, aynı yöne, aynı yükseklikte. Kanat uçlarındaki siyah, gövdedeki pembeye düşen gölge, uzun boyunların ince çizgisi; hepsi küçücük bir alanda, büyük bir dikkatle.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= SERİ III ================= -->
+  <section class="series" id="diller">
+    <div class="series-head">
+      <div class="numeral">III</div>
+      <div class="series-kicker">İki tekil eser</div>
+      <h2>Başka Diller</h2>
+      <p>Havuzdan ve gökyüzünden uzakta iki farklı ses. Biri yüzyıllık bir süsleme geleneğinden, öteki karanlığın içinden geliyor.</p>
+    </div>
+
+    <div class="row two offset">
+      <figure class="piece">
+        <button class="frame" data-i="7" aria-label="Büyüt: Lotus">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim5.webp" width="914" height="722" alt="Minyatür üslubunda bir sayfa: yeşil kemerli çerçeve içinde turuncu bir lotus çiçeği, kenarlarda kıvrımlı dallar ve küçük kırmızı çiçekler" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">III · 01</div>
+          <h3>Lotus</h3>
+          <div class="medium">Kâğıt üzerine · minyatür üslubu</div>
+          <p>Minyatür geleneğine selam veren bir sayfa. Kemerli, yeşil bir çerçevenin içinde katmanlı turuncu yapraklarıyla açmış bir lotus. Kenar suyu boyunca kıvrılan ince dallar ve küçük kırmızı çiçekler. Dokulu kâğıtta boyanın yumuşak geçişleri, her yaprağın kendi gölgesini taşıması... Havuzdaki nilüfer bambaşka bir dilde, bambaşka bir zamanda yeniden açmış gibi.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="piece slim">
+        <button class="frame" data-i="8" aria-label="Büyüt: Uzaktaki">
+          <span class="fillet"><span class="mat" style="display:block"><img src="resim7.webp" width="442" height="954" alt="Yukarıdan aşağı akan koyu kahverengi fırça izleri arasında uzaktan görünen bir ayı silueti, dipte belli belirsiz kırmızı lekeler" loading="lazy" decoding="async"></span></span>
+        </button>
+        <figcaption>
+          <div class="cat">III · 02</div>
+          <h3>Uzaktaki</h3>
+          <div class="medium">Tuval üzerine</div>
+          <p>Galerinin en karanlık, belki de en cesur işi. Yukarıdan aşağı akan koyu kahverengi fırça izleri: ağaç mı, çalı mı, yağmur mu, karar izleyene bırakılmış. Bu belirsizliğin içinde, uzakta bir ayı duruyor: kıpırdamıyor, sadece bakıyor. Dibinde neredeyse görünmeyen kırmızı lekeler, belki birkaç çiçek. Her şeyi anlatmayan, izleyeni bekleten bir tablo.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= KAPANIŞ ================= -->
+  <section class="closing">
+    <blockquote>Bu sayfadaki her şey bir masanın üstünde başladı: bir kavanoz renkli su, birkaç fırça, akşamın geç saatleri. O sabır ve o dikkat burada, olması gereken yerde, duvarda.</blockquote>
+    <div class="sign">Sevgiyle asıldı</div>
+  </section>
+</main>
+
+<footer>kubra.life</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="Tablo görünümü">
+  <button class="lb-btn lb-close" aria-label="Kapat"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <button class="lb-btn lb-prev" aria-label="Önceki"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>
+  <button class="lb-btn lb-next" aria-label="Sonraki"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+  <img alt="">
+  <div class="lb-cap"><span class="cat"></span><h4></h4></div>
+</div>
+
+<!-- ================= MÜZİK KUTUSU ================= -->
+<div class="music" id="music">
+  <span class="music-tip">müziği açmak için dokun</span>
+  <div class="music-panel" id="music-panel">
+    <div class="mp-title" id="mp-title"></div>
+    <div class="mp-artist" id="mp-artist"></div>
+    <div class="mp-video"><div id="yt"></div></div>
+    <div class="mp-row">
+      <button class="mp-play" id="mp-play" aria-label="Çal / durdur">
+        <svg id="ico-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg>
+        <svg id="ico-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      </button>
+      <input class="mp-vol" id="mp-vol" type="range" min="0" max="100" value="55" aria-label="Ses">
+    </div>
+    <div class="mp-status" id="mp-status"></div>
+  </div>
+  <button class="disc" id="disc" aria-label="Müzik kutusu"></button>
+</div>
+
+<script>
+/* ============================================================
+   AYARLAR — değiştirmek istersen sadece burayı düzenle
+   ============================================================ */
+const CONFIG = {
+  // Şifrenin SHA-256 özeti (şifrenin kendisi kodda görünmez).
+  // Şu anki şifre: "nilüfer" (büyük/küçük harf ve ü/u farkı önemsiz).
+  passHash: 'd129e5d80b43a5fde41b64ef5a6eb67bd8ed2c0b0e9ef83807ba3e979a129d49',
+  // Bir kez doğru girildiğinde aynı cihazda tekrar sormasın mı?
+  remember: true,
+  music: {
+    // Kendi mp3'ünü kullanmak istersen: dosyayı klasöre koy, adını buraya yaz (ör. 'muzik.mp3').
+    // Boş bırakılırsa doğrudan YouTube çalar.
+    file: '',
+    fileTitle: 'Bizim şarkı',
+    fileArtist: '',
+    // YouTube şarkıları: ilki açılmazsa sıradakine geçer. (Hepsi gömülebilir olarak kontrol edildi.)
+    tracks: [
+      { id: '7maJOI3QMu0', title: 'River Flows in You',           artist: 'Yiruma' },
+      { id: '2Vv-BfVoq4g', title: 'Perfect',                      artist: 'Ed Sheeran' },
+      { id: 'vGJTaP6anOU', title: "Can't Help Falling in Love",   artist: 'Elvis Presley' }
+    ]
+  }};
+
+/* ---------- küçük SHA-256 (her tarayıcıda, file:// dahil çalışsın diye) ---------- */
+function sha256(ascii){
+  const rr=(v,a)=>(v>>>a)|(v<<(32-a));const maxW=2**32;let r='';const words=[];
+  const bits=ascii.length*8;const H=[],K=[];let pc=0;const ic={};
+  for(let c=2;pc<64;c++){if(!ic[c]){for(let i=0;i<313;i+=c)ic[i]=c;H[pc]=(c**.5*maxW)|0;K[pc++]=(c**(1/3)*maxW)|0}}
+  const hash=H.slice(0,8);ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(let i=0;i<ascii.length;i++){const j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=(bits/maxW)|0;words[words.length]=bits;
+  for(let j=0;j<words.length;){const w=words.slice(j,j+=16);const old=hash.slice(0);
+    for(let i=0;i<64;i++){const w15=w[i-15],w2=w[i-2];const a=hash[0],e=hash[4];
+      const t1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^(~e&hash[6]))+K[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);
+      const t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash.unshift((t1+t2)|0);hash[4]=(hash[4]+t1)|0;hash.length=8}
+    for(let i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0}
+  for(let i=0;i<8;i++)for(let j=3;j+1;j--){const b=(hash[i]>>(j*8))&255;r+=(b<16?'0':'')+b.toString(16)}
+  return r;
+}
+function normalize(s){
+  const map={'ç':'c','ğ':'g','ı':'i','i̇':'i','ö':'o','ş':'s','ü':'u','â':'a','î':'i','û':'u'};
+  return s.trim().toLocaleLowerCase('tr-TR').replace(/i̇|[çğıöşüâîû]/g,m=>map[m]||m).replace(/\s+/g,'');
+}
+
+/* ---------- güvenli depolama ---------- */
+const store={
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+
+/* ============================================================
+   KİLİT
+   ============================================================ */
+const lock=document.getElementById('lock'),
+      form=document.getElementById('lock-form'),
+      input=document.getElementById('lock-input'),
+      msg=document.getElementById('lock-msg');
+const KEY='kubra.life:acik';
+const wrongLines=['Bu değil… bir kez daha?','Yaklaştın gibi.','İpucuna bir bak.'];
+let wrong=0;
+
+function openGallery(fromForm){
+  document.body.classList.remove('locked');
+  lock.classList.add('gone');
+  setTimeout(()=>lock.remove(),1200);
+  revealSetup();
+  if(fromForm){ Music.playFromGesture(); }
+  else { Music.invite(); }
+}
+
+if(CONFIG.remember && store.get(KEY)==='1'){
+  lock.style.transition='none';openGallery(false);
+}else{
+  setTimeout(()=>input.focus({preventScroll:true}),400);
+}
+
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(sha256(unescape(encodeURIComponent(normalize(input.value))))===CONFIG.passHash){
+    if(CONFIG.remember) store.set(KEY,'1');
+    msg.textContent='';
+    openGallery(true);
+  }else{
+    msg.textContent=wrongLines[Math.min(wrong++,wrongLines.length-1)];
+    const card=lock.querySelector('.lock-card');
+    card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+    input.select();
+  }
+});
+
+/* ============================================================
+   KAYDIRMA EFEKTLERİ
+   ============================================================ */
+function revealSetup(){
+  const pieces=document.querySelectorAll('.piece');
+  if(!('IntersectionObserver' in window)){pieces.forEach(p=>p.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>{
+    es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  pieces.forEach(p=>io.observe(p));
+}
+// üst bar: aşağı kayarken gizlen, yukarı kayarken görün
+(()=>{let last=0;const bar=document.getElementById('topbar');
+  addEventListener('scroll',()=>{const y=scrollY;bar.classList.toggle('hide',y>last&&y>200);last=y},{passive:true});
+})();
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+(()=>{
+  const lb=document.getElementById('lb'),img=lb.querySelector('img'),
+        cat=lb.querySelector('.cat'),ttl=lb.querySelector('h4');
+  const items=[...document.querySelectorAll('.frame')].sort((a,b)=>a.dataset.i-b.dataset.i).map(f=>{
+    const fig=f.closest('figure');const im=f.querySelector('img');
+    return {src:im.getAttribute('src'),alt:im.alt,cat:fig.querySelector('.cat').textContent,title:fig.querySelector('h3').textContent,btn:f};
+  });
+  let cur=0,lastFocus=null;
+  function show(i){
+    cur=(i+items.length)%items.length;const it=items[cur];
+    img.style.opacity=0;
+    const pre=new Image();pre.onload=pre.onerror=()=>{img.src=it.src;img.alt=it.alt;img.style.opacity=1};pre.src=it.src;
+    cat.textContent=it.cat;ttl.textContent=it.title;
+  }
+  function open(i){lastFocus=document.activeElement;show(i);lb.classList.add('open');document.body.style.overflow='hidden';lb.querySelector('.lb-close').focus()}
+  function close(){lb.classList.remove('open');document.body.style.overflow='';if(lastFocus)lastFocus.focus({preventScroll:true})}
+  items.forEach((it,i)=>it.btn.addEventListener('click',()=>open(i)));
+  lb.querySelector('.lb-close').onclick=close;
+  lb.querySelector('.lb-prev').onclick=e=>{e.stopPropagation();show(cur-1)};
+  lb.querySelector('.lb-next').onclick=e=>{e.stopPropagation();show(cur+1)};
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(cur-1);
+    if(e.key==='ArrowRight')show(cur+1);
+  });
+  let sx=0,sy=0;
+  lb.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  lb.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))show(cur+(dx<0?1:-1));
+    else if(dy>90)close();
+  },{passive:true});
+})();
+
+/* ============================================================
+   MÜZİK — önce klasördeki mp3, olmazsa YouTube
+   ============================================================ */
+const Music=(()=>{
+  const box=document.getElementById('music'),disc=document.getElementById('disc'),
+        playBtn=document.getElementById('mp-play'),vol=document.getElementById('mp-vol'),
+        status=document.getElementById('mp-status'),videoBox=document.querySelector('.mp-video'),
+        icoPlay=document.getElementById('ico-play'),icoPause=document.getElementById('ico-pause');
+  const tracks=CONFIG.music.tracks||[];
+  function setMeta(title,artist){
+    document.getElementById('mp-title').textContent=title||'';
+    document.getElementById('mp-artist').textContent=artist||'';
+  }
+  if(CONFIG.music.file)setMeta(CONFIG.music.fileTitle,CONFIG.music.fileArtist);
+  else if(tracks[0])setMeta(tracks[0].title,tracks[0].artist);
+
+  let mode=CONFIG.music.file?'file':'yt';
+  let audio=null,player=null,ready=false,wantPlay=false,idIdx=0,playing=false,failed=false,ytLoading=false;
+
+  function setPlaying(p){
+    playing=p;disc.classList.toggle('spin',p);
+    icoPlay.style.display=p?'none':'';icoPause.style.display=p?'':'none';
+    if(p){box.classList.remove('tip');disc.classList.remove('invite');status.textContent=''}
+  }
+  function invite(){if(!playing){disc.classList.add('invite');box.classList.add('tip');setTimeout(()=>box.classList.remove('tip'),6000)}}
+
+  /* ---- 1) yerel ses dosyası ---- */
+  if(mode==='file'){
+    videoBox.style.display='none';
+    audio=new Audio();audio.loop=true;audio.preload='auto';audio.volume=+vol.value/100;
+    audio.addEventListener('play',()=>setPlaying(true));
+    audio.addEventListener('pause',()=>setPlaying(false));
+    audio.addEventListener('error',()=>{ if(mode==='file') switchToYouTube() });
+    audio.src=CONFIG.music.file;
+  }
+
+  /* ---- 2) YouTube yedeği ---- */
+  function switchToYouTube(){
+    mode='yt';setPlaying(false);
+    if(location.protocol==='file:'){
+      status.textContent='Müzik, site internete yüklenince çalar. YouTube bilgisayardan açılan dosyada çalışmıyor.';
+    }
+    if(tracks[0])setMeta(tracks[0].title,tracks[0].artist);
+    if(!tracks.length){failed=true;status.textContent='Müzik dosyası bulunamadı.';return}
+    videoBox.style.display='';
+    if(ytLoading)return;ytLoading=true;
+    const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';s.async=true;
+    s.onerror=()=>{failed=true;status.textContent='Müzik şu an yüklenemedi.'};
+    document.head.appendChild(s);
+    if(wantPlay)status.textContent='Yükleniyor…';
+  }
+  window.onYouTubeIframeAPIReady=function(){
+    player=new YT.Player('yt',{
+      width:220,height:124,videoId:tracks[0].id,
+      playerVars:{playsinline:1,rel:0,modestbranding:1,controls:0,disablekb:1,iv_load_policy:3,
+        origin:location.protocol.startsWith('http')?location.origin:undefined},
+      events:{
+        onReady(){ready=true;player.setVolume(+vol.value);status.textContent='';if(wantPlay)player.playVideo()},
+        onStateChange(e){
+          if(e.data===YT.PlayerState.PLAYING)setPlaying(true);
+          else if(e.data===YT.PlayerState.PAUSED)setPlaying(false);
+          else if(e.data===YT.PlayerState.ENDED){player.seekTo(0);player.playVideo()}
+        },
+        onError(){
+          idIdx++;
+          if(idIdx<tracks.length){
+            const t=tracks[idIdx];setMeta(t.title,t.artist);
+            wantPlay?player.loadVideoById(t.id):player.cueVideoById(t.id);
+          }else{failed=true;setPlaying(false);status.textContent=location.protocol==='file:'?'Müzik, site internete yüklenince çalar.':'Bu şarkı burada çalınamıyor.'}
+        }
+      }
+    });
+  };
+  if(mode==='yt')switchToYouTube();
+
+  /* ---- ortak kontroller ---- */
+  function play(){
+    if(failed)return;
+    wantPlay=true;
+    if(mode==='file'){
+      const p=audio.play();
+      if(p&&p.catch)p.catch(err=>{
+        if(err&&err.name==='NotAllowedError')invite();   // tarayıcı dokunuş istiyor
+        else if(mode==='file')switchToYouTube();          // dosya yok / açılamadı
+      });
+    }else{
+      if(ready){try{player.setVolume(+vol.value);player.playVideo()}catch(e){}}
+      setTimeout(()=>{if(!playing)invite()},2500);
+    }
+  }
+  function pause(){
+    wantPlay=false;
+    if(mode==='file')audio.pause();
+    else if(ready)try{player.pauseVideo()}catch(e){}
+  }
+
+  disc.addEventListener('click',()=>{
+    const isOpen=box.classList.toggle('open');
+    if(isOpen&&!playing)play();
+  });
+  playBtn.addEventListener('click',()=>playing?pause():play());
+  vol.addEventListener('input',()=>{
+    if(mode==='file')audio.volume=+vol.value/100;
+    else if(ready)player.setVolume(+vol.value);
+  });
+  document.addEventListener('click',e=>{if(!box.contains(e.target))box.classList.remove('open')});
+
+  return {playFromGesture(){play()},invite};
+})();
+</script>
+</body>
+</html>
