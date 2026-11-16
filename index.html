@@ -359,6 +359,61 @@ footer{text-align:center;padding:0 20px 44px;font-size:11px;letter-spacing:.2em;
   .poem-body{font-size:15.5px;line-height:1.85}
 }
 
+/* ---------------- PAFTA (kat planı) ---------------- */
+.plan-section .series-kicker{color:var(--gold)}
+.sheet-wrap{max-width:1240px;margin:0 auto;position:relative}
+.sheet-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold-soft) transparent}
+.sheet{
+  display:block;width:100%;min-width:880px;height:auto;
+  background:
+    linear-gradient(rgba(201,169,110,.035) 1px,transparent 1px) 0 0/25px 25px,
+    linear-gradient(90deg,rgba(201,169,110,.035) 1px,transparent 1px) 0 0/25px 25px,
+    #100f0d;
+  border:1px solid rgba(201,169,110,.25);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.9), inset 0 0 0 10px #0d0c0b, inset 0 0 0 11px rgba(201,169,110,.18);
+}
+.swipe-hint{display:none;text-align:center;font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink-mute);margin-top:12px}
+@media (max-width:900px){.swipe-hint{display:block}}
+.sheet text{font-family:var(--sans);fill:var(--ink-soft)}
+.sheet .wall{stroke:#d6ccb6;stroke-linecap:square}
+.sheet .gap{fill:#100f0d}
+.sheet .door{stroke:rgba(236,230,218,.7);stroke-width:1.2;fill:none}
+.sheet .swing{stroke:rgba(236,230,218,.35);stroke-width:1;fill:none;stroke-dasharray:3 3}
+.sheet .dim{stroke:rgba(201,169,110,.65);stroke-width:1;fill:none}
+.sheet .dimtxt{fill:var(--gold);font-size:12px;letter-spacing:.06em}
+.sheet .axis{stroke:rgba(201,169,110,.35);stroke-width:1;stroke-dasharray:10 4 2 4;fill:none}
+.sheet .bubble circle{fill:#100f0d;stroke:var(--gold);stroke-width:1}
+.sheet .bubble text{fill:var(--gold);font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central}
+.sheet .room .floor{fill:transparent;transition:fill .5s var(--ease)}
+.sheet .room .rname{font-family:var(--serif);font-style:italic;font-size:21px;fill:var(--ink);text-anchor:middle;transition:fill .4s}
+.sheet .room .rmeta{font-size:10.5px;letter-spacing:.16em;text-anchor:middle;fill:var(--ink-mute)}
+.sheet .room{cursor:pointer;outline:none}
+.sheet .room:hover .floor,.sheet .room:focus-visible .floor{fill:rgba(201,169,110,.07)}
+.sheet .room:hover .rname,.sheet .room:focus-visible .rname{fill:var(--gold)}
+.sheet .room.red .floor{fill:rgba(150,30,30,.10)}
+.sheet .room.red:hover .floor{fill:rgba(170,40,40,.18)}
+.sheet .art line{stroke:var(--gold);stroke-width:5;stroke-linecap:butt}
+.sheet .art .tag rect{fill:#100f0d;stroke:var(--gold);stroke-width:1}
+.sheet .art .tag text{fill:var(--gold);font-size:10.5px;font-weight:500;letter-spacing:.06em;text-anchor:middle;dominant-baseline:central}
+.sheet .art{cursor:pointer}
+.sheet .art:hover line{stroke:#f0d9a6}
+.sheet .art:hover .tag rect{fill:var(--gold)}
+.sheet .art:hover .tag text{fill:#100f0d}
+.sheet .empty line{stroke:var(--gold);stroke-dasharray:6 5;animation:wait 2.4s ease-in-out infinite}
+@keyframes wait{50%{opacity:.35}}
+.sheet .note{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--gold)}
+.sheet .tb .tb-frame{fill:none;stroke:rgba(236,230,218,.55);stroke-width:1}
+.sheet .tb line{stroke:rgba(236,230,218,.3);stroke-width:1}
+.sheet .tb .lbl{font-size:8.5px;letter-spacing:.22em;fill:var(--ink-mute);text-transform:uppercase}
+.sheet .tb .val{font-size:13px;fill:var(--ink)}
+.sheet .tb .proj{font-family:var(--serif);font-size:19px;fill:var(--ink)}
+.sheet .tb .projit{font-family:var(--serif);font-style:italic;font-size:19px;fill:var(--gold)}
+.plan-tip{position:absolute;pointer-events:none;background:rgba(16,15,13,.96);border:1px solid var(--gold-soft);padding:9px 13px;
+  font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;z-index:5}
+.plan-tip small{display:block;font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:2px}
+.plan-tip.on{opacity:1;transform:none}
+@media (hover:none){.plan-tip{display:none}}
+
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width:860px){
   .row.two{grid-template-columns:1fr}
@@ -406,6 +461,7 @@ footer{text-align:center;padding:0 20px 44px;font-size:11px;letter-spacing:.2em;
 <header class="topbar" id="topbar">
   <a class="brand" href="#top">kubra<span>.</span>life</a>
   <nav class="nav" aria-label="Bölümler">
+    <a href="#pafta">Plan</a>
     <a href="#havuz">Havuz</a>
     <a href="#kizil">Kızıl</a>
     <a href="#diller">Diller</a>
@@ -425,7 +481,189 @@ footer{text-align:center;padding:0 20px 44px;font-size:11px;letter-spacing:.2em;
       <p>Bu sayfa onları duvara asmak için yapıldı. Her birinin önünde biraz durmak, bir yaprağın fırça izine, bir kanadın ucundaki siyaha bakmak için.</p>
       <p class="hero-quote">Tabloların sana benziyor;<br>bakan, farkında olmadan biraz daha uzun kalıyor.</p>
     </div>
-    <a class="scroll-cue" href="#havuz">Sergiye geç<i></i></a>
+    <a class="scroll-cue" href="#pafta">Sergiye geç<i></i></a>
+  </section>
+
+  <!-- ================= PAFTA ================= -->
+  <section class="series plan-section" id="pafta">
+    <div class="series-head">
+      <div class="series-kicker">Pafta 01 · Kat Planı</div>
+      <h2>Serginin Planı</h2>
+      <p>Bu sergiyi gezmenin bir yolu daha var: yukarıdan, bir paftanın üzerinden. Odalardan birine dokun, seni oraya götürsün. Duvarlardaki altın çizgiler senin tabloların.</p>
+    </div>
+    <div class="sheet-wrap">
+      <div class="sheet-scroll">
+<svg class="sheet" viewBox="0 0 1240 800" role="img" aria-label="Serginin mimari kat planı">
+
+  <!-- ===== AKS ÇİZGİLERİ ===== -->
+  <g>
+    <line class="axis" x1="100" y1="96" x2="100" y2="752"/>
+    <line class="axis" x1="460" y1="96" x2="460" y2="752"/>
+    <line class="axis" x1="860" y1="96" x2="860" y2="752"/>
+    <g class="bubble"><circle cx="100" cy="766" r="12"/><text x="100" y="766">A</text></g>
+    <g class="bubble"><circle cx="460" cy="766" r="12"/><text x="460" y="766">B</text></g>
+    <g class="bubble"><circle cx="860" cy="766" r="12"/><text x="860" y="766">C</text></g>
+    <line class="axis" x1="86" y1="110" x2="902" y2="110"/>
+    <line class="axis" x1="860" y1="360" x2="902" y2="360"/>
+    <line class="axis" x1="86" y1="550" x2="902" y2="550"/>
+    <line class="axis" x1="86" y1="710" x2="902" y2="710"/>
+    <g class="bubble"><circle cx="914" cy="110" r="12"/><text x="914" y="110">1</text></g>
+    <g class="bubble"><circle cx="914" cy="360" r="12"/><text x="914" y="360">2</text></g>
+    <g class="bubble"><circle cx="914" cy="550" r="12"/><text x="914" y="550">3</text></g>
+    <g class="bubble"><circle cx="914" cy="710" r="12"/><text x="914" y="710">4</text></g>
+  </g>
+
+  <!-- ===== ÖLÇÜLER ===== -->
+  <g>
+    <line class="dim" x1="100" y1="72" x2="860" y2="72"/>
+    <line class="dim" x1="100" y1="64" x2="100" y2="80"/><line class="dim" x1="460" y1="64" x2="460" y2="80"/><line class="dim" x1="860" y1="64" x2="860" y2="80"/>
+    <line class="dim" x1="95" y1="77" x2="105" y2="67"/><line class="dim" x1="455" y1="77" x2="465" y2="67"/><line class="dim" x1="855" y1="77" x2="865" y2="67"/>
+    <text class="dimtxt" x="280" y="64" text-anchor="middle">7,20</text>
+    <text class="dimtxt" x="660" y="64" text-anchor="middle">8,00</text>
+    <line class="dim" x1="100" y1="40" x2="860" y2="40"/>
+    <line class="dim" x1="100" y1="32" x2="100" y2="48"/><line class="dim" x1="860" y1="32" x2="860" y2="48"/>
+    <line class="dim" x1="95" y1="45" x2="105" y2="35"/><line class="dim" x1="855" y1="45" x2="865" y2="35"/>
+    <text class="dimtxt" x="480" y="32" text-anchor="middle">15,20</text>
+
+    <line class="dim" x1="58" y1="110" x2="58" y2="710"/>
+    <line class="dim" x1="50" y1="110" x2="66" y2="110"/><line class="dim" x1="50" y1="360" x2="66" y2="360"/><line class="dim" x1="50" y1="550" x2="66" y2="550"/><line class="dim" x1="50" y1="710" x2="66" y2="710"/>
+    <line class="dim" x1="53" y1="115" x2="63" y2="105"/><line class="dim" x1="53" y1="365" x2="63" y2="355"/><line class="dim" x1="53" y1="555" x2="63" y2="545"/><line class="dim" x1="53" y1="715" x2="63" y2="705"/>
+    <text class="dimtxt" transform="translate(50 235) rotate(-90)" text-anchor="middle">5,00</text>
+    <text class="dimtxt" transform="translate(50 455) rotate(-90)" text-anchor="middle">3,80</text>
+    <text class="dimtxt" transform="translate(50 630) rotate(-90)" text-anchor="middle">3,20</text>
+  </g>
+
+  <!-- ===== ODALAR (tıklanabilir zeminler) ===== -->
+  <a class="room" href="#havuz" data-go="havuz" tabindex="0" aria-label="Havuz Salonu">
+    <rect class="floor" x="107" y="117" width="349" height="429"/>
+    <text class="rname" x="282" y="262">Havuz Salonu</text>
+    <text class="rmeta" x="282" y="284">63,36 m² · ±0.00</text>
+  </a>
+  <a class="room red" href="#kizil" data-go="kizil" tabindex="0" aria-label="Kızıl Oda">
+    <rect class="floor" x="464" y="117" width="389" height="239"/>
+    <text class="rname" x="660" y="242">Kızıl Oda</text>
+    <text class="rmeta" x="660" y="264">40,00 m² · ±0.00</text>
+  </a>
+  <a class="room" href="#diller" data-go="diller" tabindex="0" aria-label="Diller Koridoru">
+    <rect class="floor" x="464" y="364" width="389" height="182"/>
+    <text class="rname" x="660" y="452">Diller Koridoru</text>
+    <text class="rmeta" x="660" y="474">30,40 m² · ±0.00</text>
+  </a>
+  <a class="room" href="#sira-sende" data-go="sira-sende" tabindex="0" aria-label="Sıra Sende">
+    <rect class="floor" x="584" y="554" width="269" height="149"/>
+    <text class="rname" x="642" y="612">Sıra Sende</text>
+    <text class="rmeta" x="642" y="632">17,92 m² · ±0.00</text>
+  </a>
+  <g class="room" style="cursor:default">
+    <rect class="floor" x="107" y="554" width="469" height="149"/>
+    <text class="rname" x="440" y="624">Giriş Holü</text>
+    <text class="rmeta" x="440" y="646">30,72 m² · ±0.00</text>
+  </g>
+
+  <!-- ===== DUVARLAR ===== -->
+  <g>
+    <!-- dış duvarlar -->
+    <rect x="100" y="110" width="760" height="600" fill="none" class="wall" stroke-width="14"/>
+    <!-- iç duvarlar -->
+    <line class="wall" x1="460" y1="110" x2="460" y2="550" stroke-width="8"/>
+    <line class="wall" x1="460" y1="360" x2="860" y2="360" stroke-width="8"/>
+    <line class="wall" x1="100" y1="550" x2="860" y2="550" stroke-width="8"/>
+    <line class="wall" x1="580" y1="550" x2="580" y2="710" stroke-width="8"/>
+    <!-- Havuz Salonu'ndaki serbest duvar -->
+    <line class="wall" x1="232" y1="404" x2="332" y2="404" stroke-width="8"/>
+
+    <!-- açıklıklar -->
+    <rect class="gap" x="240" y="701" width="90" height="18"/>   <!-- ana giriş -->
+    <rect class="gap" x="190" y="544" width="70" height="12"/>   <!-- giriş → havuz -->
+    <rect class="gap" x="454" y="440" width="12" height="70"/>   <!-- havuz → koridor -->
+    <rect class="gap" x="620" y="354" width="70" height="12"/>   <!-- koridor → kızıl -->
+    <rect class="gap" x="690" y="544" width="70" height="12"/>   <!-- koridor → sıra sende -->
+  </g>
+
+  <!-- ===== KAPILAR ===== -->
+  <g>
+    <!-- ana giriş: çift kanat -->
+    <line class="door" x1="240" y1="710" x2="240" y2="665"/><path class="swing" d="M240 665 A45 45 0 0 1 285 710"/>
+    <line class="door" x1="330" y1="710" x2="330" y2="665"/><path class="swing" d="M330 665 A45 45 0 0 0 285 710"/>
+    <line class="door" x1="190" y1="550" x2="190" y2="490"/><path class="swing" d="M190 490 A60 60 0 0 1 250 550"/>
+    <line class="door" x1="460" y1="440" x2="520" y2="440"/><path class="swing" d="M520 440 A60 60 0 0 1 460 500"/>
+    <line class="door" x1="690" y1="360" x2="690" y2="300"/><path class="swing" d="M690 300 A60 60 0 0 0 630 360"/>
+    <line class="door" x1="760" y1="550" x2="760" y2="610"/><path class="swing" d="M760 610 A60 60 0 0 1 700 550"/>
+    <text class="note" x="285" y="742" text-anchor="middle">giriş · şifreli kapı</text>
+  </g>
+
+  <!-- ===== TABLOLAR ===== -->
+  <!-- I · Havuz Salonu -->
+  <g class="art" data-t="I · 01" data-n="Beyaz Bırakılanlar" data-go="havuz"><line x1="118" y1="160" x2="118" y2="220"/><g class="tag"><rect x="128" y="179" width="38" height="20" rx="2"/><text x="147" y="189">I·01</text></g></g>
+  <g class="art" data-t="I · 02" data-n="Üç Koi" data-go="havuz"><line x1="118" y1="240" x2="118" y2="300"/><g class="tag"><rect x="128" y="259" width="38" height="20" rx="2"/><text x="147" y="269">I·02</text></g></g>
+  <g class="art" data-t="I · 03" data-n="Halkalar" data-go="havuz"><line x1="215" y1="128" x2="275" y2="128"/><g class="tag"><rect x="226" y="138" width="38" height="20" rx="2"/><text x="245" y="148">I·03</text></g></g>
+  <g class="art" data-t="I · 04" data-n="İki Yol" data-go="havuz"><line x1="315" y1="128" x2="375" y2="128"/><g class="tag"><rect x="326" y="138" width="38" height="20" rx="2"/><text x="345" y="148">I·04</text></g></g>
+  <g class="art" data-t="I · 05" data-n="Nilüfer ve Koi" data-go="havuz"><line x1="247" y1="395" x2="317" y2="395"/><g class="tag"><rect x="263" y="360" width="38" height="20" rx="2"/><text x="282" y="370">I·05</text></g></g>
+
+  <!-- II · Kızıl Oda -->
+  <g class="art" data-t="II · 01" data-n="Yalnız Uçuş" data-go="kizil"><line x1="560" y1="128" x2="630" y2="128"/><g class="tag"><rect x="574" y="138" width="42" height="20" rx="2"/><text x="595" y="148">II·01</text></g></g>
+  <g class="art" data-t="II · 02" data-n="Birlikte" data-go="kizil"><line x1="690" y1="128" x2="760" y2="128"/><g class="tag"><rect x="704" y="138" width="42" height="20" rx="2"/><text x="725" y="148">II·02</text></g></g>
+
+  <!-- III · Diller Koridoru -->
+  <g class="art" data-t="III · 01" data-n="Lotus" data-go="diller"><line x1="500" y1="537" x2="570" y2="537"/><g class="tag"><rect x="511" y="505" width="48" height="20" rx="2"/><text x="535" y="515">III·01</text></g></g>
+  <g class="art" data-t="III · 02" data-n="Uzaktaki" data-go="diller"><line x1="842" y1="395" x2="842" y2="455"/><g class="tag"><rect x="780" y="415" width="48" height="20" rx="2"/><text x="804" y="425">III·02</text></g></g>
+
+  <!-- IV · Sıra Sende -->
+  <g class="art" data-t="IV · 01" data-n="Kışıma Bahar · şiir kürsüsü" data-go="sira-sende">
+    <rect x="716" y="640" width="40" height="22" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+    <g class="tag"><rect x="712" y="670" width="48" height="20" rx="2"/><text x="736" y="680">IV·01</text></g>
+  </g>
+  <g class="art empty" data-t="IV · 02" data-n="Boş duvar · sıra sende" data-go="sira-sende">
+    <line x1="842" y1="590" x2="842" y2="680"/>
+    <g class="tag"><rect x="778" y="625" width="48" height="20" rx="2"/><text x="802" y="635">IV·02</text></g>
+  </g>
+  <text class="note" x="836" y="700" text-anchor="end">boş duvar</text>
+
+  <!-- ===== KUZEY OKU ===== -->
+  <g transform="translate(1072 150)">
+    <circle r="34" fill="none" stroke="rgba(236,230,218,.4)"/>
+    <path d="M0 -30 L11 16 L0 8 L-11 16 Z" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+    <path d="M0 -30 L0 8 L-11 16 Z" fill="var(--gold)"/>
+    <text x="0" y="-44" text-anchor="middle" style="font-family:var(--serif);font-size:15px;fill:var(--gold)">K</text>
+  </g>
+
+  <!-- ===== ÖLÇEK ÇUBUĞU (1 m = 50 birim) ===== -->
+  <g transform="translate(972 262)">
+    <rect x="0" y="0" width="50" height="7" fill="var(--gold)"/><rect x="50" y="0" width="50" height="7" fill="none" stroke="var(--gold)"/>
+    <rect x="100" y="0" width="100" height="7" fill="var(--gold)" opacity=".85"/>
+    <rect x="0" y="0" width="200" height="7" fill="none" stroke="var(--gold)"/>
+    <text x="0" y="24" class="dimtxt" text-anchor="middle">0</text><text x="50" y="24" class="dimtxt" text-anchor="middle">1</text>
+    <text x="100" y="24" class="dimtxt" text-anchor="middle">2</text><text x="200" y="24" class="dimtxt" text-anchor="middle">4 m</text>
+  </g>
+
+  <!-- ===== ANTET ===== -->
+  <g class="tb" transform="translate(944 406)">
+    <rect class="tb-frame" x="0" y="0" width="256" height="304"/>
+    <text class="lbl" x="14" y="22">Proje</text>
+    <text class="proj" x="14" y="50">Kışıma Bahar</text>
+    <text class="projit" x="14" y="74">Sergisi</text>
+    <line x1="0" y1="90" x2="256" y2="90"/>
+    <text class="lbl" x="14" y="108">Yer</text><text class="val" x="14" y="126">kubra.life</text>
+    <text class="lbl" x="134" y="108">Sanatçı</text><text class="val" x="134" y="126">Kübra</text>
+    <line x1="120" y1="90" x2="120" y2="138"/>
+    <line x1="0" y1="138" x2="256" y2="138"/>
+    <text class="lbl" x="14" y="156">Pafta</text><text class="val" x="14" y="174">01 · Kat Planı</text>
+    <text class="lbl" x="134" y="156">Ölçek</text><text class="val" x="134" y="174">1/50</text>
+    <line x1="120" y1="138" x2="120" y2="186"/>
+    <line x1="0" y1="186" x2="256" y2="186"/>
+    <text class="lbl" x="14" y="204">Revizyonlar</text>
+    <text class="val" x="14" y="224" style="font-size:12px">A · Boş duvar açıldı</text>
+    <text class="val" x="14" y="242" style="font-size:12px;fill:var(--gold)">B · Sanatçının eseri bekleniyor</text>
+    <line x1="0" y1="256" x2="256" y2="256"/>
+    <text class="lbl" x="14" y="274">Tarih</text><text class="val" x="14" y="292">16.11.2026</text>
+    <text class="lbl" x="134" y="274">Kot</text><text class="val" x="134" y="292">±0.00</text>
+    <line x1="120" y1="256" x2="120" y2="304"/>
+  </g>
+</svg>
+      </div>
+      <div class="plan-tip" id="plan-tip"><small></small><span></span></div>
+      <div class="swipe-hint">← paftayı parmağınla kaydır →</div>
+    </div>
   </section>
 
   <!-- ================= SERİ I ================= -->
@@ -1139,6 +1377,36 @@ const Music=(()=>{
     if(playing){stopSrc();startFrom(t)}else{offset=t;fill.style.width=(t/buf.duration*100)+'%';cur.textContent=fmt(t)}
   });
   box.addEventListener('contextmenu',e=>e.preventDefault());
+})();
+
+/* ============================================================
+   PAFTA: odaya dokun → bölüme git, tabloya dokun → büyüt
+   ============================================================ */
+(()=>{
+  const wrap=document.querySelector('.sheet-wrap');if(!wrap)return;
+  const tip=document.getElementById('plan-tip');
+  // paftadaki tablo kodu → galerideki büyütme sırası (data-i)
+  const lb={'I · 01':0,'I · 02':1,'I · 03':2,'I · 04':3,'I · 05':4,'II · 01':5,'II · 02':6,'III · 01':7,'III · 02':8};
+  const go=id=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})};
+  wrap.querySelectorAll('.room[data-go]').forEach(r=>{
+    r.addEventListener('click',e=>{e.preventDefault();go(r.dataset.go)});
+    r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(r.dataset.go)}});
+  });
+  wrap.querySelectorAll('.art').forEach(a=>{
+    a.addEventListener('mouseenter',()=>{
+      const r=a.getBoundingClientRect(),w=wrap.getBoundingClientRect();
+      tip.querySelector('small').textContent=a.dataset.t;tip.querySelector('span').textContent=a.dataset.n;
+      tip.style.left=(r.left-w.left+r.width/2-tip.offsetWidth/2)+'px';tip.style.top=(r.top-w.top-tip.offsetHeight-10)+'px';
+      tip.classList.add('on');
+    });
+    a.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+    a.addEventListener('click',e=>{
+      e.stopPropagation();tip.classList.remove('on');
+      const i=lb[a.dataset.t];
+      if(i!==undefined){const f=document.querySelector('.frame[data-i="'+i+'"]');if(f)f.click()}
+      else go(a.dataset.go);
+    });
+  });
 })();
 
 /* Her şey hazır: kilidi şimdi başlat */
